@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Switzerland Map POC</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 600px; margin-top: 10px; }
+    button { margin: 5px; padding: 10px; }
+  </style>
+</head>
+<body>
+  <button id="show-plane">Show Plane</button>
+  <button id="remove-plane">Remove Plane</button>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([46.8182, 8.2275], 7);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+    // Keep a reference to the plane marker
+    let planeMarker = null;
+
+    // Plane icon
+    const planeIcon = L.icon({
+      iconUrl: 'plane.png',
+      iconSize: [32, 32]
+    });
+
+    // Show Plane button
+    document.getElementById('show-plane').addEventListener('click', () => {
+      if (!planeMarker) { // Only add if not already present
+        setTimeout(() => {
+          planeMarker = L.marker([47.3769, 8.5417], { icon: planeIcon })
+            .addTo(map)
+            .bindPopup('Plane appeared');
+        }, 1500); // Simulated delay
+      }
+    });
+
+    // Remove Plane button
+    document.getElementById('remove-plane').addEventListener('click', () => {
+      if (planeMarker) {
+        map.removeLayer(planeMarker);
+        planeMarker = null;
+      }
+    });
+  </script>
+</body>
+</html>
