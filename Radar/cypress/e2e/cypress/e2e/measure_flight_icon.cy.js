@@ -3,7 +3,7 @@ describe('Plane appearance response time', () => {
     const durations = [];
 
     beforeEach(() => {
-        cy.visit('http://localhost:3000/radar');
+        cy.visit('http://localhost:3000');
         cy.wait(2000); // Warm-up
     });
 
